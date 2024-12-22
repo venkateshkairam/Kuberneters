@@ -1,0 +1,12 @@
+apiVersion: v1 
+kind: Pod
+metadata:
+  name: tomee-pod
+  labels:
+    type: webserver
+    author: venkatesh
+spec:
+  containers:
+    - name: tomee-pod
+      image: tomee 
+      

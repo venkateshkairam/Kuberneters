@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+  labels:
+    author: venkatesh
+    type: database
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      type: db
+  template:
+    metadata:
+      labels:  # Removed "name" as it's unnecessary here.
+        type: db
+    spec:
+      containers:
+        - name: postgres-pod
+          image: postgres
+          env:  # Fixed typo from "evn" to "env".
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret  # Updated secret name.
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret  # Updated secret name.
+                  key: password
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret  # Updated secret name.
+                  key: dbname

@@ -1,0 +1,17 @@
+apiversion: v1 
+kind: Pod 
+metadata:
+  name: database
+  labels:
+    type: database
+    author: venkat 
+spec:
+  containers:
+    - name: database
+      image: mysql
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: name

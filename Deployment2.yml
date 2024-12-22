@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: jenkins-deployment
+  labels:
+    type: ci-cd
+    author: venkatesh
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      type:: jenkins-pod
+  template:
+    metadata:
+      name: jenkis 
+      labels:
+        type: jenkins-pod
+    spec:
+      containers:
+        - name: jenkins-pod
+          image: jenkins/jenkins
+          ports:
+            - containerPort: 8080
+              hostPort: 9090
+
+...

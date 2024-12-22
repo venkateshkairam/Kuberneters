@@ -1,0 +1,18 @@
+apiVersion: v1 
+kind: Service 
+metadata:
+  name: myservice
+  labels:
+    author: venkat
+spec:
+  type: ClusterIP
+  ports:
+    - targetPort: 80
+      port: 80
+  selector:
+    type: proxy
+    author: venkat
+
+
+
+      
