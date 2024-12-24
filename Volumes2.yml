@@ -1,0 +1,22 @@
+---
+apiVersion: v1 
+kind: Pod 
+metadata:
+  name: mysql-pod 
+  labels:
+    author: venkat 
+    type: database 
+spec:
+  containers:
+    - name: mysql-pod
+      image: mysql 
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: venkat 
+      volumeMounts:
+        - name: newvolume
+          mountPath: /var/lib/mysql
+  volumes:
+    - name: newvolume
+      emptyDir: {}
+...

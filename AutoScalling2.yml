@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    type: proxy
+    author: venkatesh
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: proxy
+  template:
+    metadata:
+      labels:
+        run: proxy
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 300m
+            limits:
+              cpu: 500m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myservice
+  labels:
+    run: nginx
+    author: venkat
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    run: proxy
